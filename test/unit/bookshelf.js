@@ -183,9 +183,9 @@ module.exports = function() {
         assert.strictEqual(bookshelf.model('TestModel').custom, 'something');
       });
 
-      it('throws when trying to register an already registered model name', function() {
-        bookshelf.model('TestModel', TestModel);
-        assert.throws(() => bookshelf.model('TestModel', TestModel));
+      it('ignore the already registered model name', function() {
+        const RegisteredModel = bookshelf.model('TestModel', TestModel);
+        assert.deepStrictEqual(bookshelf.model('TestModel'), RegisteredModel);
       });
 
       it('returns undefined if the specified model is not found', function() {
